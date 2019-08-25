@@ -28,7 +28,9 @@ public class BookController {
   AuthorService authorService;
   @PostMapping
   public ResponseEntity<?>createBook(@RequestBody BookForm bookForm){
+
     Category category = categoryService.findByName(bookForm.getCategory());
+
     Author author =authorService.findByName(bookForm.getAuthor());
     Book book = new Book(bookForm.getName(),bookForm.getContent(),bookForm.getProducer());
     book.setCategory(category);
