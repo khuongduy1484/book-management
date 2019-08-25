@@ -12,7 +12,7 @@ public class Category {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private CategoryName name;
+  private String category;
   @OneToMany
   private List<Book> books;
   public Category() {
@@ -34,11 +34,11 @@ public class Category {
     this.id = id;
   }
 
-  public CategoryName getName() {
-    return name;
+  public String getCategory() {
+    return category;
   }
 
-  public void setName(CategoryName name) {
-    this.name = name;
+  public void setCategory(String category) {
+    this.category = category;
   }
 }
