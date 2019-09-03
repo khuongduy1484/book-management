@@ -34,7 +34,7 @@ public class Book {
   public Book() {
   }
 
-  public Book(@Size(min = 2, max = 100) @NotNull String name,  @NotNull @Size(min = 2, max = 1000) String content, @NotNull @Size(min = 2, max = 1000) String producer) {
+  public Book(@Size(min = 2, max = 10) @NotNull String name,  @NotNull @Size(min = 2, max = 1000) String content, @NotNull @Size(min = 2, max = 1000) String producer) {
     this.name = name;
     this.content = content;
     this.producer = producer;

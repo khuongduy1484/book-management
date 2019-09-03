@@ -19,6 +19,11 @@ public class BookServiceImpl implements BookService {
   }
 
   @Override
+  public Book getBookFindByName(String name) {
+    return bookRepository.findByName(name);
+  }
+
+  @Override
   public Book findById(Long id) {
     return bookRepository.findById(id).get();
   }

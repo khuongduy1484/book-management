@@ -7,4 +7,5 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book,Long> {
+  public Book findByName(String name);
 }
