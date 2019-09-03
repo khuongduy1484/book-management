@@ -12,13 +12,14 @@ import com.demo.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/book")
+@Transactional(rollbackFor = Exception.class)
 public class BookController {
   @Autowired
   BookService bookService;
@@ -29,10 +30,10 @@ public class BookController {
   @PostMapping
   public ResponseEntity<?>createBook(@RequestBody BookForm bookForm){
 
-    Category category = categoryService.findByName(bookForm.getCategory());
 
     Author author =authorService.findByName(bookForm.getAuthor());
     Book book = new Book(bookForm.getName(),bookForm.getContent(),bookForm.getProducer());
+    Category category = categoryService.findByName(bookForm.getCategory());
     book.setCategory(category);
     book.setAuthor(author);
     bookService.save(book);
@@ -41,12 +42,13 @@ public class BookController {
 
   @PutMapping("/{id}")
   public ResponseEntity<?>updateBook(@PathVariable("id") Long id,@RequestBody BookForm b){
-    Book book = bookService.findById(id);
-    Category category = categoryService.findByName(b.getCategory());
     Author author = authorService.findByName(b.getAuthor());
-    book.setAuthor(author);
-    book.setCategory(category);
+    Book book = bookService.findById(id);
     book.setName(b.getName());
+    bookService.save(book);
+    book.setAuthor(author);
+    Category category = categoryService.findByName(b.getCategory());
+    book.setCategory(category);
     book.setContent(b.getContent());
     bookService.save(book);
     return new ResponseEntity<>(new ResponseMessage("Update book successfully "), HttpStatus.OK);

@@ -1,5 +1,7 @@
 package com.demo.model;
 
+import org.springframework.context.annotation.Scope;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -12,7 +14,7 @@ public class Book {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  @Size(min = 2,max = 100)
+  @Size(min = 2,max = 10)
   @NotNull
   private String name;
   @NotNull
@@ -21,8 +23,9 @@ public class Book {
   @Size(min = 2,max = 1000)
   private String content;
   @NotNull
-  @Size(min = 2,max = 1000)
+  @Size(min = 2,max = 5)
   private String producer;
+  @NotNull
   @ManyToOne
   private Category category;
   @ManyToOne
@@ -31,7 +34,7 @@ public class Book {
   public Book() {
   }
 
-  public Book(@Size(min = 2, max = 100) @NotNull String name, @NotNull @NotNull @Size(min = 2, max = 1000) String content, @NotNull @Size(min = 2, max = 1000) String producer) {
+  public Book(@Size(min = 2, max = 100) @NotNull String name,  @NotNull @Size(min = 2, max = 1000) String content, @NotNull @Size(min = 2, max = 1000) String producer) {
     this.name = name;
     this.content = content;
     this.producer = producer;
