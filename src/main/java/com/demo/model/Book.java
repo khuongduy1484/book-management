@@ -14,7 +14,7 @@ public class Book {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  @Size(min = 2,max = 10)
+  @Size(min = 2,max = 50)
   @NotNull
   private String name;
   @NotNull
@@ -23,9 +23,8 @@ public class Book {
   @Size(min = 2,max = 1000)
   private String content;
   @NotNull
-  @Size(min = 2,max = 5)
+  @Size(min = 2,max =10)
   private String producer;
-  @NotNull
   @ManyToOne
   private Category category;
   @ManyToOne

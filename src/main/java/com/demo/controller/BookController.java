@@ -19,7 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/book")
-@Transactional(rollbackFor = Exception.class)
+//@Transactional(rollbackFor = Exception.class)
 public class BookController {
   @Autowired
   BookService bookService;
@@ -50,6 +50,7 @@ public class BookController {
     Category category = categoryService.findByName(b.getCategory());
     book.setCategory(category);
     book.setContent(b.getContent());
+    book.setProducer(b.getProducer());
     bookService.save(book);
     return new ResponseEntity<>(new ResponseMessage("Update book successfully "), HttpStatus.OK);
   }
